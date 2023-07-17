@@ -3,7 +3,7 @@ package vn.hunghd.flutter.plugins.imagecropper;
 
 import android.app.Activity;
 
-import androidx.appcompat.app.AppCompatDelegate;
+//import androidx.appcompat.app.AppCompatDelegate;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
@@ -19,9 +19,9 @@ import io.flutter.plugin.common.PluginRegistry;
  * ImageCropperPlugin
  */
 public class ImageCropperPlugin implements MethodCallHandler, FlutterPlugin, ActivityAware {
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
+//    static {
+//        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+//    }
 
     private static final String CHANNEL = "plugins.hunghd.vn/image_cropper";
     private ImageCropperDelegate delegate;

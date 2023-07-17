@@ -252,10 +252,14 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
             return new AspectRatio(null, 5.0f, 3.0f);
         } else if ("5x4".equals(name)) {
             return new AspectRatio(null, 5.0f, 4.0f);
+        } else if ("4x5".equals(name)) {
+            return new AspectRatio(null, 4.0f, 5.0f);
         } else if ("7x5".equals(name)) {
             return new AspectRatio(null, 7.0f, 5.0f);
         } else if ("16x9".equals(name)) {
             return new AspectRatio(null, 16.0f, 9.0f);
+        } else if ("1.91x1".equals(name)) {
+            return new AspectRatio(null, 1.91f, 1f);
         } else {
             return new AspectRatio(activity.getString(com.yalantis.ucrop.R.string.ucrop_label_original).toUpperCase(),
                     CropImageView.SOURCE_IMAGE_ASPECT_RATIO, 1.0f);

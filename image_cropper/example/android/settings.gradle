@@ -1,5 +1,8 @@
 include ':app'
 
+include ':ucrop'
+project(':ucrop').projectDir=new File('/Users/idan/StudioProjects/uCrop/ucrop')
+
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
 def properties = new Properties()
 
