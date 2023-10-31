@@ -15,6 +15,8 @@ import com.yalantis.ucrop.view.CropImageView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -123,9 +125,10 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         if (requestCode == UCrop.REQUEST_CROP) {
             if (resultCode == RESULT_OK) {
                 final Uri resultUri = UCrop.getOutput(data);
+                final float resultAspectRatio = UCrop.getOutputCropAspectRatio(data);
                 final String imagePath = fileUtils.getPathFromUri(activity, resultUri);
                 cacheImage(imagePath);
-                finishWithSuccess(imagePath);
+                finishWithSuccess(imagePath, resultAspectRatio);
                 return true;
             } else if (resultCode == UCrop.RESULT_ERROR) {
                 final Throwable cropError = UCrop.getError(data);
@@ -140,9 +143,12 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         return false;
     }
 
-    private void finishWithSuccess(String imagePath) {
+    private void finishWithSuccess(String imagePath, float aspectRatioOutput) {
         if (pendingResult != null) {
-            pendingResult.success(imagePath);
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("imagePath", imagePath);
+            resultMap.put("aspectRatioOutput", aspectRatioOutput);
+            pendingResult.success(resultMap);
             clearMethodCallAndResult();
         }
     }

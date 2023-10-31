@@ -36,6 +36,10 @@ abstract class CroppedFileBase {
     throw UnimplementedError('.path has not been implemented.');
   }
 
+  double? get aspectRatio {
+    throw UnimplementedError('.aspectRatio has not been implemented.');
+  }
+
   /// Synchronously read the entire file contents as a string using the given [Encoding].
   ///
   /// By default, `encoding` is [utf8].

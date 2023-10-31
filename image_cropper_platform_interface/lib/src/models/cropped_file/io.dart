@@ -12,8 +12,11 @@ import './base.dart';
 
 /// A CroppedFile backed by a dart:io File.
 class CroppedFile extends CroppedFileBase {
+
+  double? _aspectRatio;
+
   /// Construct a PickedFile object backed by a dart:io File.
-  CroppedFile(String path)
+  CroppedFile(String path, this._aspectRatio)
       : _file = File(path),
         super(path);
 
@@ -22,6 +25,11 @@ class CroppedFile extends CroppedFileBase {
   @override
   String get path {
     return _file.path;
+  }
+
+  @override
+  double? get aspectRatio {
+    return _aspectRatio;
   }
 
   @override

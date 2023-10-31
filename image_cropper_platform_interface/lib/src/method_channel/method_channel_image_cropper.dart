@@ -93,9 +93,9 @@ class MethodChannelImageCropper extends ImageCropperPlatform {
       }
     }
 
-    final String? resultPath =
+    final Map<dynamic, dynamic>? result =
         await _channel.invokeMethod('cropImage', arguments);
-    return resultPath == null ? null : CroppedFile(resultPath);
+    return result == null ? null : CroppedFile(result['imagePath'], result['aspectRatioOutput']);
   }
 
   ///
@@ -147,6 +147,6 @@ class MethodChannelImageCropper extends ImageCropperPlatform {
       return null;
     }
     final String? resultPath = await _channel.invokeMethod('recoverImage');
-    return resultPath == null ? null : CroppedFile(resultPath);
+    return resultPath == null ? null : CroppedFile(resultPath, null);
   }
 }
