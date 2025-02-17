@@ -93,9 +93,16 @@ class MethodChannelImageCropper extends ImageCropperPlatform {
       }
     }
 
-    final Map<dynamic, dynamic>? result =
-        await _channel.invokeMethod('cropImage', arguments);
-    return result == null ? null : CroppedFile(result['imagePath'], result['aspectRatioOutput']);
+    if (Platform.isAndroid) {
+      final Map<dynamic, dynamic>? result =
+      await _channel.invokeMethod('cropImage', arguments);
+      return result == null ? null : CroppedFile(result['imagePath'], result['aspectRatioOutput']);
+    } else {
+      final String? resultPath =
+      await _channel.invokeMethod('cropImage', arguments);
+      return resultPath == null ? null : CroppedFile(resultPath, -1);
+    }
+
   }
 
   ///
