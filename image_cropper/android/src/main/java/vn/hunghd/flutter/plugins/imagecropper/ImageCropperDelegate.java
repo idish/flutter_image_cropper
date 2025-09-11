@@ -249,15 +249,22 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
     private AspectRatio parseAspectRatio(Map<?, ?> preset) {
         final String name = preset.containsKey("name") ? preset.get("name").toString() : null;
         final Object data = preset.containsKey("data") ? preset.get("data") : null;
-        final Integer ratioX = data instanceof Map ? Integer.parseInt(((Map<?, ?>) data).get("ratio_x").toString()) : null;
-        final Integer ratioY = data instanceof Map ? Integer.parseInt(((Map<?, ?>) data).get("ratio_y").toString()) : null;
 
-        if ("original".equals(name) || ratioX == null) {
+        // Parse ratio_x and ratio_y as doubles
+        final Double ratioX = (data instanceof Map && ((Map<?, ?>) data).get("ratio_x") != null)
+                ? Double.parseDouble(((Map<?, ?>) data).get("ratio_x").toString())
+                : null;
+
+        final Double ratioY = (data instanceof Map && ((Map<?, ?>) data).get("ratio_y") != null)
+                ? Double.parseDouble(((Map<?, ?>) data).get("ratio_y").toString())
+                : null;
+
+        if ("original".equals(name) || ratioX == null || ratioY == null) {
             return new AspectRatio(activity.getString(com.yalantis.ucrop.R.string.ucrop_label_original),
                     CropImageView.SOURCE_IMAGE_ASPECT_RATIO, 1.0f);
         } else {
-            return new AspectRatio(name, ratioX * 1.0f, ratioY * 1.0f);
+            return new AspectRatio(name, ratioX.floatValue(), ratioY.floatValue());
         }
-
     }
+
 }

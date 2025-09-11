@@ -11,7 +11,7 @@ abstract class CropAspectRatioPresetData {
   /// name should be unique
   String get name;
 
-  (int ratioX, int ratioY)? get data;
+  (double ratioX, int ratioY)? get data;
 }
 
 enum CropAspectRatioPreset implements CropAspectRatioPresetData {
@@ -53,7 +53,7 @@ enum CropAspectRatioPreset implements CropAspectRatioPresetData {
   }
 
   @override
-  (int ratioX, int ratioY)? get data {
+  (double ratioX, int ratioY)? get data {
     switch (this) {
       case CropAspectRatioPreset.original:
         return null;
