@@ -343,7 +343,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
+class
+CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
   @override
   (int, int)? get data => (2, 3);
 

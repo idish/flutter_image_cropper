@@ -168,7 +168,7 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
     private UCrop.Options setupUiCustomizedOptions(UCrop.Options options, MethodCall call) {
         String title = call.argument("android.toolbar_title");
         Integer toolbarColor = call.argument("android.toolbar_color");
-        Integer statusBarColor = call.argument("android.statusbar_color");
+        Boolean statusBarLight = call.argument("android.statusbar_light");
         Integer toolbarWidgetColor = call.argument("android.toolbar_widget_color");
         Integer backgroundColor = call.argument("android.background_color");
         Integer activeControlsWidgetColor = call.argument("android.active_controls_widget_color");
@@ -189,22 +189,7 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         if (toolbarColor != null) {
             options.setToolbarColor(toolbarColor);
         }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-              // For Android 12 (API 31) and beyond
-          WindowInsetsController insetsController = activity.getWindow().getInsetsController();
-          if (insetsController != null) {
-             insetsController.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                 WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS);
-             activity.getWindow().setStatusBarColor(statusBarColor != null ? statusBarColor : Color.TRANSPARENT);
-          }
-        }
-        else{
-        if (statusBarColor != null) {
-            options.setStatusBarColor(statusBarColor);
-        } else if (toolbarColor != null) {
-            options.setStatusBarColor(darkenColor(toolbarColor));
-        }
-        }
+        options.setStatusBarLight(false);
         if (toolbarWidgetColor != null) {
             options.setToolbarWidgetColor(toolbarWidgetColor);
         }

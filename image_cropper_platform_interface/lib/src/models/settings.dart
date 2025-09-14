@@ -154,8 +154,8 @@ class AndroidUiSettings extends PlatformUiSettings {
   /// desired color of the Toolbar
   final Color? toolbarColor;
 
-  /// desired color of status
-  final Color? statusBarColor;
+  /// status bar light/dark
+  final bool? statusBarLight;
 
   /// desired color of Toolbar text and buttons (default is black)
   final Color? toolbarWidgetColor;
@@ -211,7 +211,6 @@ class AndroidUiSettings extends PlatformUiSettings {
   AndroidUiSettings({
     this.toolbarTitle,
     this.toolbarColor,
-    this.statusBarColor,
     this.toolbarWidgetColor,
     this.backgroundColor,
     this.activeControlsWidgetColor,
@@ -226,6 +225,7 @@ class AndroidUiSettings extends PlatformUiSettings {
     this.lockAspectRatio,
     this.hideBottomControls,
     this.initAspectRatio,
+    this.statusBarLight,
     this.cropStyle = CropStyle.rectangle,
     this.aspectRatioPresets = const [
       CropAspectRatioPreset.original,
@@ -240,7 +240,7 @@ class AndroidUiSettings extends PlatformUiSettings {
   Map<String, dynamic> toMap() => {
         'android.toolbar_title': this.toolbarTitle,
         'android.toolbar_color': int32(this.toolbarColor?.value),
-        'android.statusbar_color': int32(this.statusBarColor?.value),
+        'android.statusbar_light': this.statusBarLight,
         'android.toolbar_widget_color': int32(this.toolbarWidgetColor?.value),
         'android.background_color': int32(this.backgroundColor?.value),
         'android.active_controls_widget_color':
