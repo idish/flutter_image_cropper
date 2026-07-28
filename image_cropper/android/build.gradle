@@ -5,11 +5,10 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://www.jitpack.io" }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.android.tools.build:gradle:8.13.0'
     }
 }
 
@@ -17,7 +16,7 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://www.jitpack.io" }
+		maven { url = uri('https://jitpack.io') }
     }
 }
 
@@ -25,19 +24,27 @@ apply plugin: 'com.android.library'
 
 android {
     // Conditional for compatibility with AGP <4.2.
-//    if (project.android.hasProperty("namespace")) {
-    namespace 'vn.hunghd.flutter.plugins.imagecropper'
-//    }
-    compileSdkVersion 33
+    if (project.android.hasProperty("namespace")) {
+        namespace 'vn.hunghd.flutter.plugins.imagecropper'
+    }
+    compileSdkVersion 36
 
     defaultConfig {
         minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildTypes {
+        release {
+            consumerProguardFiles 'consumer-proguard-rules.pro'
+        }
+    }
     lintOptions {
         disable 'InvalidPackage'
     }
     dependencies {
+        // Kept as a local project rather than upstream's published
+        // com.github.Yalantis:ucrop artifact: this app relies on the uCrop
+        // fork (locked aspect ratio tab, hidden scale tab, setHideAspectRatioTab).
         implementation project(':ucrop')
         implementation 'androidx.preference:preference:1.2.1'
     }

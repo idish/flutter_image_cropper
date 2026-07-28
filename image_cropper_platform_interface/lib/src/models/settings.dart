@@ -159,8 +159,16 @@ class AndroidUiSettings extends PlatformUiSettings {
   /// desired color of the Toolbar
   final Color? toolbarColor;
 
-  /// status bar light/dark
+  /// desired color of status
+  @Deprecated(
+      "This property is deprecated and no longer in use. Please use 'statusBarLight' instead.")
+  final Color? statusBarColor;
+
+  /// true for light status bar (dark icons), false for dark status bar (light icons)
   final bool? statusBarLight;
+
+  /// true for light navigation bar (dark icons), false for dark navigation bar (light icons)
+  final bool? navBarLight;
 
   /// desired color of Toolbar text and buttons (default is black)
   final Color? toolbarWidgetColor;
@@ -222,6 +230,11 @@ class AndroidUiSettings extends PlatformUiSettings {
   AndroidUiSettings({
     this.toolbarTitle,
     this.toolbarColor,
+    @Deprecated(
+        "This property is deprecated and no longer in use. Please use 'statusBarLight' instead.")
+    this.statusBarColor,
+    this.statusBarLight,
+    this.navBarLight,
     this.toolbarWidgetColor,
     this.backgroundColor,
     this.activeControlsWidgetColor,
@@ -237,7 +250,6 @@ class AndroidUiSettings extends PlatformUiSettings {
     this.hideBottomControls,
     this.hideAspectRatioTab,
     this.initAspectRatio,
-    this.statusBarLight,
     this.cropStyle = CropStyle.rectangle,
     this.aspectRatioPresets = const [
       CropAspectRatioPreset.original,
@@ -251,15 +263,16 @@ class AndroidUiSettings extends PlatformUiSettings {
   @override
   Map<String, dynamic> toMap() => {
         'android.toolbar_title': this.toolbarTitle,
-        'android.toolbar_color': int32(this.toolbarColor?.value),
-        'android.statusbar_light': this.statusBarLight,
-        'android.toolbar_widget_color': int32(this.toolbarWidgetColor?.value),
-        'android.background_color': int32(this.backgroundColor?.value),
+        'android.toolbar_color': int32(this.toolbarColor?.toARGB32()),
+        'android.status_bar_light': this.statusBarLight,
+        'android.nav_bar_light': this.navBarLight,
+        'android.toolbar_widget_color': int32(this.toolbarWidgetColor?.toARGB32()),
+        'android.background_color': int32(this.backgroundColor?.toARGB32()),
         'android.active_controls_widget_color':
-            int32(this.activeControlsWidgetColor?.value),
-        'android.dimmed_layer_color': int32(this.dimmedLayerColor?.value),
-        'android.crop_frame_color': int32(this.cropFrameColor?.value),
-        'android.crop_grid_color': int32(this.cropGridColor?.value),
+            int32(this.activeControlsWidgetColor?.toARGB32()),
+        'android.dimmed_layer_color': int32(this.dimmedLayerColor?.toARGB32()),
+        'android.crop_frame_color': int32(this.cropFrameColor?.toARGB32()),
+        'android.crop_grid_color': int32(this.cropGridColor?.toARGB32()),
         'android.crop_frame_stroke_width': this.cropFrameStrokeWidth,
         'android.crop_grid_row_count': this.cropGridRowCount,
         'android.crop_grid_column_count': this.cropGridColumnCount,
