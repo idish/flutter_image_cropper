@@ -202,6 +202,12 @@ class AndroidUiSettings extends PlatformUiSettings {
   /// set to true to hide the bottom controls (shown by default)
   final bool? hideBottomControls;
 
+  /// set to true to drop just the aspect ratio tab from the bottom controls,
+  /// leaving the remaining tools (rotate) available. Use this when the caller
+  /// fixes the aspect ratio and must not let the user change it, but still
+  /// wants the rest of the bottom controls.
+  final bool? hideAspectRatioTab;
+
   /// controls the style of crop bounds, it can be rectangle or
   /// circle style (default is [CropStyle.rectangle]).
   final CropStyle cropStyle;
@@ -229,6 +235,7 @@ class AndroidUiSettings extends PlatformUiSettings {
     this.showCropGrid,
     this.lockAspectRatio,
     this.hideBottomControls,
+    this.hideAspectRatioTab,
     this.initAspectRatio,
     this.statusBarLight,
     this.cropStyle = CropStyle.rectangle,
@@ -260,6 +267,7 @@ class AndroidUiSettings extends PlatformUiSettings {
         'android.show_crop_grid': this.showCropGrid,
         'android.lock_aspect_ratio': this.lockAspectRatio,
         'android.hide_bottom_controls': this.hideBottomControls,
+        'android.hide_aspect_ratio_tab': this.hideAspectRatioTab,
         'android.init_aspect_ratio': this.initAspectRatio?.name,
         'android.crop_style': this.cropStyle.name,
         'android.aspect_ratio_presets': aspectRatioPresets
